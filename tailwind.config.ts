@@ -14,7 +14,7 @@ export default {
         primary: "#143257",
         text: {
           light: "#97AAC2",
-          gray: "#6B7280",
+          gray: "#6B7280", // navlinks inactive
           blue: "#1C477B",
           muted: "#667085",
           dark: "#101828",
@@ -23,6 +23,10 @@ export default {
           sky: "#3B82F6",
           slateAlt: "#37404C",
         },
+      },
+      fontFamily: {
+        inter: ['"Inter"', "sans-serif"],
+        weird: ['"Comic Sans MS"', "cursive"],
       },
     },
   },

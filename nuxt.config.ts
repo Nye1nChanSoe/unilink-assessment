@@ -1,17 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import Aura from "@primevue/themes/aura";
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  modules: ["@primevue/nuxt-module"],
-  css: ["~/assets/css/main.css"],
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  modules: [
+    "@primevue/nuxt-module",
+    "@nuxt/image",
+    "@nuxt/fonts",
+    "@nuxtjs/tailwindcss",
+  ],
+  css: ["primeicons/primeicons.css"],
   primevue: {
-    autoImport: true,
     options: {
       theme: {
         preset: Aura,

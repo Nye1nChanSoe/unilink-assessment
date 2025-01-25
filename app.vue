@@ -1,6 +1,12 @@
+<script setup lang="ts">
+import { NuxtLoadingIndicator } from "#components";
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <main>
+    <NuxtLoadingIndicator />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </main>
 </template>

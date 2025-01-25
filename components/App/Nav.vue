@@ -16,51 +16,75 @@ const menuItems = [
 </script>
 
 <template>
-  <nav>
-    <head class="flex justify-between items-center px-24 py-2 gap-x-16 text-sm">
-      <!-- logo -->
-      <NuxtLink to="/">
+  <header class="container mx-auto">
+    <!-- Top Navigation -->
+    <div
+      class="flex justify-between items-center px-24 py-2 gap-x-[50px] text-sm"
+    >
+      <!-- Logo -->
+      <NuxtLink to="/" class="block shrink-0">
         <NuxtImg
           src="img/logo-primary.png"
           alt="Unilinks Logo"
-          class="w-44 h-10"
+          class="w-40 h-10"
         />
       </NuxtLink>
 
-      <!-- search bar -->
-      <div class="flex-1">
+      <!-- Search Bar -->
+      <form class="flex-1" role="search" aria-label="Search">
         <IconField>
           <InputIcon class="pi pi-search" />
           <InputText v-model="search" placeholder="Search" class="w-full" />
         </IconField>
-      </div>
+      </form>
 
-      <!-- wishlist, i18n, profile -->
-      <div class="flex items-center gap-x-2 font-semibold">
-        <div class="flex gap-x-2 items-center px-4 py-2.5 text-text-slate">
+      <!-- Wishlist, Language, Profile -->
+      <nav
+        class="flex items-center gap-x-2 font-semibold shrink-0"
+        aria-label="User Actions"
+      >
+        <!-- Wishlist -->
+        <button
+          class="flex gap-x-2 cursor-pointer items-center px-3 py-2.5 text-text-slate"
+          type="button"
+          aria-label="Wishlist"
+        >
           <i class="pi pi-heart" />
           <span>Wishlist</span>
-        </div>
-        <div class="flex items-center px-3.5 py-2">
+        </button>
+
+        <!-- Language Selector -->
+        <div
+          class="flex cursor-pointer items-center px-3 py-2"
+          role="menu"
+          aria-label="Language Selector"
+        >
           <i class="pi pi-globe" />
-          <Divider layout="vertical" />
+          <Divider layout="vertical" class="!m-2.5" />
           <span>{{ lang }}</span>
         </div>
-        <div class="flex items-center px-3.5 py-2">
+
+        <!-- Profile -->
+        <button
+          class="flex cursor-pointer items-center px-3 py-2"
+          type="button"
+          aria-label="Profile"
+        >
           <Avatar
             image="/img/profile.png"
             class="mr-1.5 h-10 w-10"
             size="normal"
             shape="square"
           />
-          <p>Ngu Wah Aung</p>
-        </div>
-      </div>
-    </head>
+          <span>Ngu Wah Aung</span>
+        </button>
+      </nav>
+    </div>
 
-    <!-- Navigations -->
-    <section
+    <!-- Navigation Links -->
+    <nav
       class="font-bold flex items-center gap-x-1 px-24 border-b-2 border-gray-200 text-sm"
+      aria-label="Main Navigation"
     >
       <NuxtLink
         v-for="(item, index) in menuItems"
@@ -75,13 +99,16 @@ const menuItems = [
       >
         {{ item.label }}
       </NuxtLink>
+
+      <!-- Invite Friend Button -->
       <NuxtLink
         to="/invite"
         class="flex items-center gap-x-3 px-5 py-1 rounded-full bg-text-lightGray"
+        aria-label="Invite a Friend"
       >
-        <NuxtImg src="/img/gift.png" alt="Gift" class="w-6 h-6" />
+        <NuxtImg src="/img/gift.png" alt="Gift Icon" class="w-6 h-6" />
         Invite friend
       </NuxtLink>
-    </section>
-  </nav>
+    </nav>
+  </header>
 </template>

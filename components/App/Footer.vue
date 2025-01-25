@@ -1,8 +1,58 @@
+<script setup lang="ts">
+const sections = [
+  {
+    title: "Home",
+    links: [
+      { label: "All university", href: "/universities" },
+      { label: "Scholarship", href: "/scholarships" },
+      { label: "Study abroad", href: "/study-abroad" },
+    ],
+  },
+  {
+    title: "Service",
+    links: [
+      { label: "Admission counseling", href: "/admission-counseling" },
+      { label: "Visa service", href: "/visa-services" },
+      { label: "Health cover", href: "/health-cover" },
+      { label: "Accommodation option", href: "/accommodation" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Guide", href: "/guide" },
+      { label: "Webinars", href: "/webinars" },
+      { label: "Blog", href: "/blog" },
+    ],
+  },
+];
+
+const contactInfo = [
+  {
+    icon: "pi pi-phone",
+    label: "+959 123 456 789",
+    href: "tel:+959123456789",
+  },
+  {
+    icon: "pi pi-envelope",
+    label: "unilinks123@gmail.com",
+    href: "mailto:unilinks123@gmail.com",
+  },
+];
+
+const socialLinks = [
+  { icon: "pi pi-facebook", href: "#" },
+  { icon: "pi pi-instagram", href: "#" },
+  { icon: "pi pi-twitter", href: "#" },
+  { icon: "pi pi-linkedin", href: "#" },
+];
+</script>
+
 <template>
   <footer class="bg-primary text-white px-28 py-10">
-    <div class="flex justify-between items-start">
+    <div class="container mx-auto flex justify-between items-start">
       <!-- Logo Section -->
-      <section>
+      <div>
         <NuxtLink to="/">
           <NuxtImg
             src="img/logo-primary.png"
@@ -10,113 +60,54 @@
             class="h-10"
           />
         </NuxtLink>
-      </section>
+      </div>
 
       <!-- Navigation Links -->
-      <section class="flex gap-x-16">
-        <div>
-          <h2 class="font-bold text-lg mb-4">Home</h2>
+      <nav class="flex gap-x-16">
+        <div v-for="(section, index) in sections" :key="index">
+          <h2 class="font-bold text-lg mb-4">{{ section.title }}</h2>
           <ul class="space-y-4 text-sm">
-            <li>
-              <NuxtLink to="/universities" class="hover:text-blue-400"
-                >All university</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/scholarships" class="hover:text-blue-400"
-                >Scholarship</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/study-abroad" class="hover:text-blue-400"
-                >Study abroad</NuxtLink
-              >
+            <li v-for="(link, linkIndex) in section.links" :key="linkIndex">
+              <NuxtLink :to="link.href" class="hover:text-blue-400">
+                {{ link.label }}
+              </NuxtLink>
             </li>
           </ul>
         </div>
-
-        <!-- Service Links -->
-        <div>
-          <h2 class="font-bold text-lg mb-4">Service</h2>
-          <ul class="space-y-4 text-sm">
-            <li>
-              <NuxtLink to="/admission-counseling" class="hover:text-blue-400"
-                >Admission counseling</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/visa-services" class="hover:text-blue-400"
-                >Visa service</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/health-cover" class="hover:text-blue-400"
-                >Health cover</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/accommodation" class="hover:text-blue-400"
-                >Accommodation option</NuxtLink
-              >
-            </li>
-          </ul>
-        </div>
-
-        <!-- Resources Links -->
-        <div>
-          <h2 class="font-bold text-lg mb-4">Resources</h2>
-          <ul class="space-y-4 text-sm">
-            <li>
-              <NuxtLink to="/guide" class="hover:text-blue-400">Guide</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/webinars" class="hover:text-blue-400"
-                >Webinars</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/blog" class="hover:text-blue-400">Blog</NuxtLink>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </nav>
 
       <!-- Contact Section -->
       <section>
         <h2 class="font-bold text-lg mb-4">Contact us</h2>
         <ul class="space-y-4 text-sm">
-          <li class="flex items-center gap-x-4">
-            <i class="pi pi-phone"></i>
-            <a href="tel:+959123456789" class="hover:text-blue-400">
-              +959 123 456 789
-            </a>
-          </li>
-          <li class="flex items-center gap-x-4">
-            <i class="pi pi-envelope"></i>
-            <a href="mailto:unilinks123@gmail.com" class="hover:text-blue-400">
-              unilinks123@gmail.com
+          <li
+            v-for="(contact, contactIndex) in contactInfo"
+            :key="contactIndex"
+            class="flex items-center gap-x-4"
+          >
+            <i :class="contact.icon"></i>
+            <a :href="contact.href" class="hover:text-blue-400">
+              {{ contact.label }}
             </a>
           </li>
         </ul>
 
         <!-- Social Links -->
         <div class="flex items-center gap-x-4 mt-4">
-          <NuxtLink to="#" class="hover:text-blue-400"
-            ><i class="pi pi-facebook"></i
-          ></NuxtLink>
-          <NuxtLink to="#" class="hover:text-blue-400"
-            ><i class="pi pi-instagram"></i
-          ></NuxtLink>
-          <NuxtLink to="#" class="hover:text-blue-400"
-            ><i class="pi pi-twitter"></i
-          ></NuxtLink>
-          <NuxtLink to="#" class="hover:text-blue-400"
-            ><i class="pi pi-linkedin"></i
-          ></NuxtLink>
+          <NuxtLink
+            v-for="(social, socialIndex) in socialLinks"
+            :key="socialIndex"
+            :to="social.href"
+            class="hover:text-blue-400"
+          >
+            <i :class="social.icon"></i>
+          </NuxtLink>
         </div>
       </section>
     </div>
-    <div class="text-sm text-text-light mt-24 text-center">
+
+    <!-- Copyright -->
+    <div class="container mx-auto text-sm text-text-light mt-24 text-center">
       <p>
         Copyright © 2010-{{ new Date().getFullYear() }} Uni Link S.L. All rights
         reserved.

@@ -49,7 +49,7 @@ const socialLinks = [
 </script>
 
 <template>
-  <footer class="bg-primary text-white px-28 py-10">
+  <footer class="bg-primary text-white px-page-gap py-10">
     <div class="container mx-auto flex justify-between items-start">
       <!-- Logo Section -->
       <div>
@@ -57,7 +57,7 @@ const socialLinks = [
           <NuxtImg
             src="img/logo-primary.png"
             alt="Unilinks Logo"
-            class="h-10"
+            class="w-40 h-10"
           />
         </NuxtLink>
       </div>
@@ -107,7 +107,7 @@ const socialLinks = [
     </div>
 
     <!-- Copyright -->
-    <div class="container mx-auto text-sm text-text-light mt-24 text-center">
+    <div class="container mx-auto text-sm text-copyright mt-24 text-center">
       <p>
         Copyright © 2010-{{ new Date().getFullYear() }} Uni Link S.L. All rights
         reserved.

@@ -19,7 +19,7 @@ const menuItems = [
   <header class="container mx-auto">
     <!-- Top Navigation -->
     <div
-      class="flex justify-between items-center px-24 py-2 gap-x-[50px] text-sm"
+      class="flex justify-between items-center px-20 py-2 gap-x-[50px] text-sm"
     >
       <!-- Logo -->
       <NuxtLink to="/" class="block shrink-0">
@@ -45,7 +45,7 @@ const menuItems = [
       >
         <!-- Wishlist -->
         <button
-          class="flex gap-x-2 cursor-pointer items-center px-3 py-2.5 text-text-slate"
+          class="flex gap-x-2 cursor-pointer items-center px-3 py-2.5 text-wishlist"
           type="button"
           aria-label="Wishlist"
         >
@@ -83,7 +83,7 @@ const menuItems = [
 
     <!-- Navigation Links -->
     <nav
-      class="font-bold flex items-center gap-x-1 px-24 border-b-2 border-gray-200 text-sm"
+      class="font-bold flex items-center gap-x-1 px-24 border-b-2 border-gift text-sm"
       aria-label="Main Navigation"
     >
       <NuxtLink
@@ -91,10 +91,10 @@ const menuItems = [
         :key="index"
         :to="item.link"
         :class="[
-          'block px-4 py-3.5 hover:text-blue-600 transition-all duration-200',
+          'block px-4 py-3.5 hover:text-nav-active transition-all duration-200',
           route.path === item.link
-            ? 'text-blue-600 border-b-2 border-blue-600'
-            : 'text-text-gray',
+            ? 'text-nav-active border-b-2 border-nav-active'
+            : 'text-nav-inactive',
         ]"
       >
         {{ item.label }}
@@ -103,11 +103,11 @@ const menuItems = [
       <!-- Invite Friend Button -->
       <NuxtLink
         to="/invite"
-        class="flex items-center gap-x-3 px-5 py-1 rounded-full bg-text-lightGray"
+        class="flex items-center gap-x-3 px-5 py-1 rounded-full bg-gift transition-color duration-200 text-black hover:text-nav-active hover:bg-gray-50"
         aria-label="Invite a Friend"
       >
         <NuxtImg src="/img/gift.png" alt="Gift Icon" class="w-6 h-6" />
-        Invite friend
+        <span>Invite friend</span>
       </NuxtLink>
     </nav>
   </header>

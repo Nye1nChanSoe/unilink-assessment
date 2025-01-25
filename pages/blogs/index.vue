@@ -60,19 +60,19 @@ const selectedSort = ref({ label: "Newest first", value: "newest" });
       >
         <!-- Selected Value Display -->
         <template #value>
-          <i class="pi pi-arrow-down mr-3 text-text-muted text-sm"></i>
-          <span class="text-text-dark">{{ selectedSort.label }}</span>
+          <i class="pi pi-arrow-down mr-3 text-gray-400 text-sm"></i>
+          <span class="text-card-title">{{ selectedSort.label }}</span>
         </template>
 
         <!-- Right Icon -->
         <template #dropdownicon>
-          <i class="pi pi-chevron-down text-text-muted"></i>
+          <i class="pi pi-chevron-down text-gray-400"></i>
         </template>
       </Select>
     </div>
 
     <!-- Contents -->
-    <div class="grid grid-cols-2 grid-rows-3 gap-x-8 gap-y-8">
+    <div class="grid grid-cols-2 grid-rows-3 gap-8">
       <BlogCard
         v-for="(item, index) in paginatedCards"
         :key="item.id"

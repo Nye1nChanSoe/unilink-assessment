@@ -11,22 +11,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#143257",
-        text: {
-          light: "#97AAC2",
-          gray: "#6B7280", // navlinks inactive
-          blue: "#1C477B",
-          muted: "#667085",
-          dark: "#101828",
-          lightGray: "#E5E7EB",
-          slate: "#37404C",
-          sky: "#3B82F6",
-          slateAlt: "#37404C",
+        primary: "#143257", // unilink main theme color
+        nav: {
+          inactive: "#6B7280",
+          active: "#3B82F6",
         },
+        wishlist: "#37404C",
+        gift: "#EFF3F8",
+        card: {
+          title: "#101828",
+          content: "#667085",
+          link: "#1C477B",
+          "link-inactive": "#476996",
+        },
+        copyright: "#97AAC2",
       },
       fontFamily: {
-        inter: ['"Inter"', "sans-serif"],
-        weird: ['"Comic Sans MS"', "cursive"],
+        inter: ['"Inter"', "sans-serif"], // std
+        weird: ['"Comic Sans MS"', "cursive"], // Test font
+      },
+      spacing: {
+        "page-gap": "6rem",
       },
     },
   },

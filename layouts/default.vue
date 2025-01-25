@@ -1,9 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <section class="container mx-auto font-inter">
+  <section class="font-inter">
     <AppNav />
-    <main class="px-28">
+    <main class="px-page-gap">
       <slot />
     </main>
     <AppFooter />

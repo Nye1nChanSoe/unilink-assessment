@@ -92,7 +92,8 @@ const menuItems = [
         :to="item.link"
         :class="[
           'block px-4 py-3.5 hover:text-nav-active transition-all duration-200',
-          route.path === item.link
+          route.path === item.link ||
+          (item.link === '/blogs' && route.path.includes('/blogs'))
             ? 'text-nav-active border-b-2 border-nav-active'
             : 'text-nav-inactive',
         ]"

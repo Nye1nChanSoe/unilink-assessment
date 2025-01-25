@@ -35,7 +35,7 @@
       <!-- Read Post Link -->
       <footer>
         <NuxtLink
-          to="#"
+          :to="`/blogs/${generateSlug(`'UX review presentations 1'`)}`"
           class="flex items-center text-card-link hover:text-card-link-inactive"
         >
           Read post

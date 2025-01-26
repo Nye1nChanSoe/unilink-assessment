@@ -11,15 +11,17 @@
   },
   "dependencies": {
     "@nuxt/fonts": "^0.10.3",
-    "@nuxt/image": "^1.9.0",
+    "@nuxt/image": "^1.2.0",
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@primevue/themes": "^4.2.5",
     "@tailwindcss/typography": "^0.5.16",
     "cheerio": "^1.0.0",
     "dompurify": "^3.2.3",
+    "ipx": "^3.0.1",
     "nuxt": "^3.15.2",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.5",
+    "sharp": "^0.33.5",
     "vue": "latest",
     "vue-router": "latest"
   },

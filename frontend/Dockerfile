@@ -1,18 +1,15 @@
-FROM node:23-alpine
+FROM node:20-bullseye-slim
 
-# alphine doesn't have bash
-RUN apk add --no-cache bash
-
-WORKDIR /src
+WORKDIR /usr/src/app
 
 COPY package*.json ./
+
+RUN npm install sharp --verbose
 RUN npm install
 
 COPY . .
 
-ARG PORT=3000
-ENV PORT=${PORT}
-
-EXPOSE ${PORT}
+ENV PORT=3000
+EXPOSE 3000
 
 CMD ["npm", "run", "dev"]

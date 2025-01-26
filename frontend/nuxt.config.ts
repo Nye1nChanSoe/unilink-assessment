@@ -20,11 +20,17 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      domainURL: process.env.DOMAIN_URL,
-      apiURL: process.env.API_URL,
+      baseURL: process.env.BASE_URL || "http://localhost:3000",
+      apiURL: process.env.API_URL || "http://localhost:8000", // laravel url
     },
   },
   image: {
     dir: "public",
+    domains: ["localhost", "0.0.0.0"],
+  },
+  // https://stackoverflow.com/questions/76474128/how-to-start-a-nuxt-3-project-on-a-specific-ip-address
+  devServer: {
+    host: process.env.HOST || "0.0.0.0",
+    port: Number(process.env.PORT) || 3000,
   },
 });

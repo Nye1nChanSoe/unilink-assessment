@@ -38,10 +38,17 @@ services:
     volumes:
       - ./frontend:/src
     environment:
-      DOMAIN_URL: http://localhost:3000
-      API_URL: http://localhost
+      BASE_URL: http://0.0.0.0:3000
+      API_URL: http://backend_api
+      HOST: 0.0.0.0
+      PORT: 3000
     networks:
       - server_network
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://0.0.0.0:3000"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
 
   # PostgreSQL Database
   postgres:

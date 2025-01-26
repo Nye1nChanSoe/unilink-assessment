@@ -60,7 +60,8 @@ const blogPost = ref({
 const route = useRoute();
 const toast = useToast();
 const config = useRuntimeConfig();
-const page_url = ref(config.public.domainURL + route.fullPath);
+console.log(config.public.baseURL )
+const page_url = ref(config.public.baseURL + route.fullPath);
 
 function copyLink() {
   navigator.clipboard.writeText(page_url.value).then(

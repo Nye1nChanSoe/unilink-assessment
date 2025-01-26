@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BlogPostResource;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return BlogPost::with(['author', 'tags'])->get();
+        return BlogPostResource::collection(BlogPost::with(['author', 'tags'])->get());
     }
 
     /**
@@ -22,7 +23,8 @@ class BlogPostController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validated();
-        return BlogPost::create($validatedData);
+        $blogPost = BlogPost::create($validatedData);
+        return new BlogPostResource($blogPost);
     }
 
     /**
@@ -30,7 +32,7 @@ class BlogPostController extends Controller
      */
     public function show(string $id)
     {
-        return BlogPost::with(['author', 'tags'])->findOrFail($id);
+        return new BlogPostResource(BlogPost::with(['author', 'tags'])->findOrFail($id));
     }
 
     /**
@@ -42,7 +44,7 @@ class BlogPostController extends Controller
 
         $validatedData = $request->validated();
         $blogPost->update($validatedData);
-        return $blogPost;
+        return new BlogPostResource($blogPost);
     }
 
     /**

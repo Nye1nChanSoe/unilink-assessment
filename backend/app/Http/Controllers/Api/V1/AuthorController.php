@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AuthorResource;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return Author::all();
+        return AuthorResource::collection(Author::all());
     }
 
     /**
@@ -22,7 +23,8 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validated();
-        return Author::create($validatedData);
+        $author = Author::create($validatedData);
+        return new AuthorResource($author);
     }
 
     /**
@@ -30,7 +32,7 @@ class AuthorController extends Controller
      */
     public function show(string $id)
     {
-        return Author::findOrFail($id);
+        return new AuthorResource(Author::findOrFail($id));
     }
 
     /**
@@ -43,7 +45,7 @@ class AuthorController extends Controller
         $validatedData = $request->validated();
         $author->update($validatedData);
 
-        return $author;
+        return new AuthorResource($author);
     }
 
     /**

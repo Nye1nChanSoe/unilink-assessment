@@ -59,7 +59,8 @@ const blogPost = ref({
 
 const route = useRoute();
 const toast = useToast();
-const page_url = ref("http://localhost:3000" + route.fullPath);
+const config = useRuntimeConfig();
+const page_url = ref(config.public.domainURL + route.fullPath);
 
 function copyLink() {
   navigator.clipboard.writeText(page_url.value).then(

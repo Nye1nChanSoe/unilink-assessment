@@ -1,0 +1,65 @@
+services:
+  # PHP-FPM for Laravel
+  php:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_api
+    volumes:
+      - ./backend:/var/www/html
+      - ./backend/storage/logs:/var/log/php
+    depends_on:
+      - postgres
+    networks:
+      - server_network
+
+  # Nginx for Laravel
+  nginx_backend:
+    image: nginx:alpine
+    container_name: backend_web_server
+    ports:
+      - "80:80" # Laravel served on port 80
+    volumes:
+      - ./backend:/var/www/html
+      - ./backend/nginx:/etc/nginx/conf.d
+    depends_on:
+      - php
+    networks:
+      - server_network
+
+  # Nuxt.js Service
+  nuxt:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_ui
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/src
+    environment:
+      DOMAIN_URL: http://localhost:3000
+      API_URL: http://localhost
+    networks:
+      - server_network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    container_name: database
+    environment:
+      POSTGRES_USER: dev_
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: blog_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - server_network
+
+volumes:
+  postgres_data:
+
+networks:
+  server_network:

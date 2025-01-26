@@ -18,13 +18,13 @@ class BlogPostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'subtitle' => $this->subtitle,
-            'content_html' => $this->content_html,
-            'hero_image' => $this->hero_image,
-            'published_date' => $this->published_date,
+            'contentHtml' => $this->content_html,
+            'heroImage' => $this->hero_image,
+            'publishedDate' => $this->published_date->toIso8601String(),
             'author' => new AuthorResource($this->whenLoaded('author')),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
-            'created_at' => $this->created_at->toDateTimeString(),
-            'updated_at' => $this->updated_at->toDateTimeString(),
+            'createdAt' => $this->created_at->toIso8601String(),
+            'updatedAt' => $this->updated_at->toIso8601String(),
         ];
     }
 }

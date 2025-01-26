@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Author;
 use App\Models\BlogPost;
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,7 +27,7 @@ class BlogPostFactory extends Factory
             'content_html' => $this->faker->randomHtml(2, 4),
             'hero_image' => $this->faker->imageUrl(800, 400, 'nature', true, 'Blog Hero'),
             'author_id' => Author::factory(),
-            'published_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'published_date' => $this->faker->dateTimeBetween('-1 year', 'now')->format(DateTime::ATOM),
         ];
     }
 }

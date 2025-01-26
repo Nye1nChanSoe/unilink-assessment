@@ -9,6 +9,10 @@ class BlogPost extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'published_date' => 'datetime', // carbon instance
+    ];
+
     protected $fillable = [
         'title',
         'subtitle',

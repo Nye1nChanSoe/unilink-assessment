@@ -44,16 +44,17 @@ services:
       PORT: 3000
     networks:
       - server_network
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://0.0.0.0:3000"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://0.0.0.0:3000"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
 
   # PostgreSQL Database
   postgres:
     image: postgres:15
-    container_name: database
+    restart: always
+    container_name: pg_database
     environment:
       POSTGRES_USER: dev_
       POSTGRES_PASSWORD: 123456
@@ -64,6 +65,11 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - server_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev_"]
+      interval: 60s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:

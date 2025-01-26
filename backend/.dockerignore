@@ -1,0 +1,29 @@
+vendor
+
+# Ignore Laravel logs and storage cache
+storage/framework/cache
+storage/framework/sessions
+storage/framework/testing
+storage/framework/views
+storage/framework/down
+
+composer.lock
+
+node_modules
+
+# Ignore compiled assets (they should be built inside the container)
+public/hot
+public/storage
+public/mix-manifest.json
+
+*.idea
+*.vscode
+*.swp
+
+.DS_Store
+Thumbs.db
+
+npm-debug.log
+yarn-error.log
+*.log
+*.tmp

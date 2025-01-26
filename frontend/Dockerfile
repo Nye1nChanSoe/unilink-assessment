@@ -1,5 +1,8 @@
 FROM node:23-alpine
 
+# alphine doesn't have bash
+RUN apk add --no-cache bash
+
 WORKDIR /src
 
 COPY package*.json ./

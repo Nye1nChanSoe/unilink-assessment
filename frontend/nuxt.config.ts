@@ -24,4 +24,7 @@ export default defineNuxtConfig({
       apiURL: process.env.API_URL,
     },
   },
+  image: {
+    dir: "public",
+  },
 });

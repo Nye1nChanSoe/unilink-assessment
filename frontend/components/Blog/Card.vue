@@ -1,12 +1,22 @@
+<script setup lang="ts">
+import type { BlogPost } from "~/types";
+
+interface Props {
+  data: BlogPost;
+}
+
+defineProps<Props>();
+</script>
+
 <template>
   <article
-    class="w-full rounded-lg border bg-white shadow-xs overflow-hidden transition-shadow duration-300 hover:shadow-md"
+    class="flex flex-col h-full w-full rounded-lg border bg-white shadow-xs overflow-hidden transition-shadow duration-300 hover:shadow-md"
   >
     <!-- Image Section -->
     <figure class="relative">
       <NuxtImg
-        src="/img/blog-image.png"
-        alt="Hot air balloons"
+        :src="'/img/blog-image.png'"
+        :alt="data.title"
         class="h-64 w-full object-cover"
       />
       <!-- Overlay -->
@@ -14,28 +24,30 @@
         class="absolute bottom-0 flex w-full items-start justify-between bg-white/30 p-6 text-sm text-white backdrop-blur-md"
       >
         <div>
-          <p class="font-semibold">Nguwah</p>
-          <p>20 Jun 2024</p>
+          <p class="font-semibold">{{ data.author.name }}</p>
+          <p class="mt-px">{{ formatDate(data.publishedDate) }}</p>
         </div>
-        <p class="font-semibold">Design</p>
+        <p class="font-semibold">{{ data.author.title }}</p>
       </figcaption>
     </figure>
 
-    <!-- Content Section -->
-    <section class="px-6 py-8">
+    <section class="flex flex-col flex-1 px-6 py-8">
       <header>
         <h3 class="mb-3 text-xl font-semibold text-card-title">
-          UX review presentations
+          {{ data.title }}
         </h3>
       </header>
-      <p class="mb-10 text-card-content">
-        How do you create compelling presentations that wow your colleagues and
-        impress your managers?
-      </p>
-      <!-- Read Post Link -->
+      <!-- Wrap the main paragraph in a div with `flex-1` 
+           so it takes up leftover space and pushes the footer down. -->
+      <div class="flex-1 mb-8">
+        <p class="text-card-content">
+          {{ data.subtitle }}
+        </p>
+      </div>
+      <!-- Footer sits at the bottom of the card -->
       <footer>
         <NuxtLink
-          :to="`/blogs/${generateSlug(`'UX review presentations 1'`)}`"
+          :to="`/blogs/${data.slug}`"
           class="flex items-center text-card-link hover:text-card-link-inactive"
         >
           Read post

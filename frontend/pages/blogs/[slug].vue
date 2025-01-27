@@ -62,11 +62,11 @@ function copyLink() {
     </header>
 
     <!-- Hero Image -->
-    <div class="mb-24">
-      <img
-        :src="`https://placehold.co/2000x800`"
-        alt="Hero image"
-        class="w-full rounded-lg shadow-md"
+    <div class="mb-24 w-full">
+      <NuxtImg
+        src="/img/blog-image.png"
+        alt="Hot air balloons"
+        class="w-full rounded object-cover"
       />
     </div>
 

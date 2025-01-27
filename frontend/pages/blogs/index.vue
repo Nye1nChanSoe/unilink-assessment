@@ -1,46 +1,78 @@
 <script setup lang="ts">
-const totalCards = Array.from({ length: 10 }, (_, index) => ({
-  id: index + 1,
-  content: `Card ${index + 1}`,
-}));
+import type { BlogPost } from "~/types";
+import { ref, computed } from "vue";
 
+const config = useRuntimeConfig();
+const { data: blogPosts, error } = useFetch<BlogPost[]>(
+  `${config.public.apiURL}/${config.public.apiVersion}/blog-posts`,
+  { server: true }
+);
+
+// Pagination and filtering state
 const rowsPerPage = ref(6); // 2 columns x 3 rows
 const currentPage = ref(0);
 const search = ref("");
-
-// Compute filtered and paginated items
-const filteredCards = computed(() => {
-  if (!search.value.trim()) return totalCards;
-  return totalCards.filter((card) =>
-    card.content.toLowerCase().includes(search.value.toLowerCase())
-  );
-});
-
-const paginatedCards = computed(() => {
-  const start = currentPage.value * rowsPerPage.value;
-  const end = start + rowsPerPage.value;
-  return filteredCards.value.slice(start, end);
-});
-
-// Update the current page when the paginator changes
-const onPageChange = (event: any) => {
-  currentPage.value = event.page;
-  rowsPerPage.value = event.rows;
-};
 
 const sortOptions = [
   { label: "Newest first", value: "newest" },
   { label: "Oldest first", value: "oldest" },
   { label: "Most popular", value: "popular" },
 ];
+const selectedSort = ref(sortOptions[0]);
 
-const selectedSort = ref({ label: "Newest first", value: "newest" });
+const sortedPosts = computed(() => {
+  const posts = blogPosts.value || [];
+  const sorted = [...posts];
+
+  switch (selectedSort.value.value) {
+    case "newest":
+      sorted.sort(
+        (a, b) =>
+          new Date(b.publishedDate).getTime() -
+          new Date(a.publishedDate).getTime()
+      );
+      break;
+    case "oldest":
+      sorted.sort(
+        (a, b) =>
+          new Date(a.publishedDate).getTime() -
+          new Date(b.publishedDate).getTime()
+      );
+      break;
+    case "popular":
+      // TODO: popular sorting logic
+      break;
+  }
+
+  return sorted;
+});
+
+const filteredPosts = computed(() => {
+  if (!search.value.trim()) return sortedPosts.value;
+
+  const term = search.value.toLowerCase();
+  return sortedPosts.value.filter((post) =>
+    post.title.toLowerCase().includes(term)
+  );
+});
+
+const paginatedPosts = computed(() => {
+  const start = currentPage.value * rowsPerPage.value;
+  const end = start + rowsPerPage.value;
+  return filteredPosts.value.slice(start, end);
+});
+
+const onPageChange = (event: any) => {
+  currentPage.value = event.page;
+  rowsPerPage.value = event.rows;
+};
 </script>
 
 <template>
   <section class="container mx-auto">
-    <!-- Search and sort -->
+    <!-- Search & Sort -->
     <div class="flex items-center justify-between my-9">
+      <!-- Search -->
       <IconField>
         <InputIcon class="pi pi-search" />
         <InputText
@@ -49,13 +81,14 @@ const selectedSort = ref({ label: "Newest first", value: "newest" });
           class="w-80 !text-sm"
         />
       </IconField>
+      <!-- Sort Dropdown -->
       <Select
         v-model="selectedSort"
         :options="sortOptions"
         class="w-80 !text-sm"
         panelClass="!text-sm"
-        placeholder="Newest first"
         optionLabel="label"
+        placeholder="Newest first"
         appendTo="body"
       >
         <!-- Selected Value Display -->
@@ -71,24 +104,20 @@ const selectedSort = ref({ label: "Newest first", value: "newest" });
       </Select>
     </div>
 
-    <!-- Contents -->
+    <!-- Blog Cards (use paginatedPosts) -->
     <div class="grid grid-cols-2 grid-rows-3 gap-8">
-      <BlogCard
-        v-for="(item, index) in paginatedCards"
-        :key="item.id"
-        :data="item"
-      />
+      <BlogCard v-for="post in paginatedPosts" :key="post.id" :data="post" />
     </div>
 
     <!-- Pagination -->
     <div class="flex justify-center mt-10 mb-24">
       <Paginator
         :rows="rowsPerPage"
-        :totalRecords="filteredCards.length"
+        :totalRecords="filteredPosts.length"
         :rowsPerPageOptions="[6, 12, 18]"
         :page="currentPage"
-        @page="onPageChange"
         class="text-sm font-normal"
+        @page="onPageChange"
       />
     </div>
   </section>

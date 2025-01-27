@@ -25,6 +25,9 @@ export default {
           link: "#1C477B",
           "link-inactive": "#476996",
         },
+        footer: {
+          active: "#60a5fa",
+        },
         copyright: "#97AAC2",
       },
       fontFamily: {
@@ -33,6 +36,9 @@ export default {
       },
       spacing: {
         "page-gap": "6rem",
+        "mobile-gap": "2rem",
+        "nav-gap": "5rem",
+        "nav-mobile-gap": "1rem",
       },
     },
   },

@@ -3,9 +3,9 @@
 <template>
   <section class="font-inter">
     <AppNav />
-    <main class="px-page-gap">
+    <main class="px-mobile-gap md:px-page-gap">
       <slot />
     </main>
-    <!-- <AppFooter /> -->
+    <AppFooter />
   </section>
 </template>

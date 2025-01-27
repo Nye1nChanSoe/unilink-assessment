@@ -49,26 +49,38 @@ const socialLinks = [
 </script>
 
 <template>
-  <footer class="bg-primary text-white px-page-gap py-10">
-    <div class="container mx-auto flex justify-between items-start">
+  <footer
+    class="bg-primary text-white py-8 px-mobile-gap md:px-page-gap md:py-10"
+  >
+    <div
+      class="container mx-auto flex flex-col gap-10 md:flex-row md:justify-between md:items-start"
+    >
       <!-- Logo Section -->
-      <div>
+      <div class="flex justify-center md:justify-start">
         <NuxtLink to="/">
           <NuxtImg
             src="img/logo-primary.png"
             alt="Unilinks Logo"
-            class="w-40 h-10"
+            class="w-32 h-auto md:w-40"
           />
         </NuxtLink>
       </div>
 
       <!-- Navigation Links -->
-      <nav class="flex gap-x-16">
-        <div v-for="(section, index) in sections" :key="index">
+      <nav
+        class="flex flex-col gap-y-10 items-center md:flex-row md:gap-y-0 md:gap-x-16"
+      >
+        <div
+          v-for="(section, index) in sections"
+          :key="index"
+          class="text-center md:text-left"
+        >
           <h2 class="font-bold text-lg mb-4">{{ section.title }}</h2>
-          <ul class="space-y-4 text-sm">
+          <ul
+            class="space-y-2 text-gray-300 text-sm md:space-y-4 md:text-white"
+          >
             <li v-for="(link, linkIndex) in section.links" :key="linkIndex">
-              <NuxtLink :to="link.href" class="hover:text-blue-400">
+              <NuxtLink :to="link.href" class="hover:text-footer-active">
                 {{ link.label }}
               </NuxtLink>
             </li>
@@ -77,28 +89,32 @@ const socialLinks = [
       </nav>
 
       <!-- Contact Section -->
-      <section>
+      <section class="text-center md:text-left">
         <h2 class="font-bold text-lg mb-4">Contact us</h2>
-        <ul class="space-y-4 text-sm">
+        <ul
+          class="space-y-2 text-sm text-gray-300 md:text-space-y-2 md:text-white"
+        >
           <li
             v-for="(contact, contactIndex) in contactInfo"
             :key="contactIndex"
-            class="flex items-center gap-x-4"
+            class="flex items-center justify-center md:justify-start gap-x-4"
           >
             <i :class="contact.icon"></i>
-            <a :href="contact.href" class="hover:text-blue-400">
+            <a :href="contact.href" class="hover:text-footer-active">
               {{ contact.label }}
             </a>
           </li>
         </ul>
 
         <!-- Social Links -->
-        <div class="flex items-center gap-x-4 mt-4">
+        <div
+          class="flex justify-center items-center gap-x-4 mt-10 md:justify-start md:mt-6"
+        >
           <NuxtLink
             v-for="(social, socialIndex) in socialLinks"
             :key="socialIndex"
             :to="social.href"
-            class="hover:text-blue-400"
+            class="hover:text-footer-active"
           >
             <i :class="social.icon"></i>
           </NuxtLink>
@@ -107,7 +123,7 @@ const socialLinks = [
     </div>
 
     <!-- Copyright -->
-    <div class="container mx-auto text-sm text-copyright mt-24 text-center">
+    <div class="text-xs text-copyright mt-10 text-center md:mt-24 md:text-sm">
       <p>
         Copyright © 2010-{{ new Date().getFullYear() }} Uni Link S.L. All rights
         reserved.

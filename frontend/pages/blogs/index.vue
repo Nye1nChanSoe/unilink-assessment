@@ -5,7 +5,7 @@ import { ref, computed } from "vue";
 const config = useRuntimeConfig();
 const { data: blogPosts, error } = useFetch<BlogPost[]>(
   `${config.public.apiURL}/${config.public.apiVersion}/blog-posts`,
-  { server: true }
+  { server: false }
 );
 
 // Pagination and filtering state
@@ -71,25 +71,27 @@ const onPageChange = (event: any) => {
 <template>
   <section class="container mx-auto">
     <!-- Search & Sort -->
-    <div class="flex items-center justify-between my-9">
+    <div
+      class="flex flex-col gap-y-2 items-center justify-between my-9 md:flex-row"
+    >
       <!-- Search -->
-      <IconField>
+      <IconField class="w-full !text-sm md:w-80">
         <InputIcon class="pi pi-search" />
         <InputText
           v-model="search"
           placeholder="Search"
-          class="w-80 !text-sm"
+          class="w-full !text-sm md:w-80"
         />
       </IconField>
       <!-- Sort Dropdown -->
       <Select
         v-model="selectedSort"
         :options="sortOptions"
-        class="w-80 !text-sm"
         panelClass="!text-sm"
         optionLabel="label"
         placeholder="Newest first"
         appendTo="body"
+        class="w-full !text-sm md:w-80"
       >
         <!-- Selected Value Display -->
         <template #value>
@@ -105,18 +107,25 @@ const onPageChange = (event: any) => {
     </div>
 
     <!-- Blog Cards (use paginatedPosts) -->
-    <div class="grid grid-cols-2 grid-rows-3 gap-8">
+    <div
+      class="grid grid-col-1 grid-rows-6 gap-4 md:grid-cols-2 md:grid-rows-3 md:gap-8"
+    >
       <BlogCard v-for="post in paginatedPosts" :key="post.id" :data="post" />
     </div>
 
     <!-- Pagination -->
     <div class="flex justify-center mt-10 mb-24">
       <Paginator
+        :template="{
+          '640px': 'PageLinks',
+          default:
+            'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown',
+        }"
         :rows="rowsPerPage"
         :totalRecords="filteredPosts.length"
         :rowsPerPageOptions="[6, 12, 18]"
         :page="currentPage"
-        class="text-sm font-normal"
+        class="text-xs font-normal md:text-sm"
         @page="onPageChange"
       />
     </div>

@@ -21,7 +21,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseURL: process.env.BASE_URL || "http://localhost:3000",
-      apiURL: process.env.API_URL || "http://localhost:8000", // laravel url
+      apiURL: process.env.API_URL || "http://localhost:8000/api", // laravel url
+      apiVersion: process.env.API_VERSION || "v1",
     },
   },
   image: {

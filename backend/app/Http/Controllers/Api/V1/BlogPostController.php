@@ -32,7 +32,8 @@ class BlogPostController extends Controller
      */
     public function show(string $id)
     {
-        return new BlogPostResource(BlogPost::with(['author', 'tags'])->findOrFail($id));
+        $blogPost = BlogPost::with(['author', 'tags'])->where('slug', $id)->firstOrFail();
+        return new BlogPostResource($blogPost);
     }
 
     /**

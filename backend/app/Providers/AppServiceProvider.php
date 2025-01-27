@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\BlogPost;
+use App\Observers\BlogPostObserver;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // disable the wrapping: data {}
         JsonResource::withoutWrapping();
+        BlogPost::observe(BlogPostObserver::class);
     }
 }

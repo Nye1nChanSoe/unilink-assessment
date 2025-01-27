@@ -18,6 +18,7 @@ export type Tag = {
 export type BlogPost = {
   id: number;
   title: string;
+  slug: string;
   subtitle: string;
   contentHtml: string;
   heroImage: string;

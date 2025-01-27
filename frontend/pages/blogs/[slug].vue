@@ -86,7 +86,7 @@ function copyLink() {
       </ClientOnly>
     </section>
 
-    <Divider layout="horizontal" class="max-w-[720px] !m-8" />
+    <Divider layout="horizontal" class="max-w-[720px] !mb-7" />
 
     <!-- Author Section -->
     <footer class="md:w-[720px]">

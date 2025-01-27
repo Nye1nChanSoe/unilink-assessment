@@ -9,7 +9,7 @@ const page_url = ref(config.public.baseURL + route.fullPath);
 const { data, error } = useFetch<BlogPost>(
   `${config.public.apiURL}/${config.public.apiVersion}/blog-posts/${route.params.slug}`,
   {
-    server: true,
+    server: false,
   }
 );
 
@@ -36,19 +36,28 @@ function copyLink() {
 </script>
 
 <template>
-  <article v-if="data" class="flex flex-col items-center py-24 px-6">
+  <article
+    v-if="data"
+    class="flex flex-col items-center py-10 md:py-24 md:px-6"
+  >
     <!-- Title and Metadata -->
-    <header class="max-w-[960px] text-center mb-16">
-      <p class="text-card-link font-semibold mb-3">
+    <header
+      class="max-w-[960px] text-center mb-section-mobile-gap md:mb-section-gap"
+    >
+      <p class="text-card-link text-sm font-semibold mb-meta-gap md:text-base">
         Published {{ formatDate(data.publishedDate) }}
       </p>
-      <h1 class="text-5xl font-semibold mb-6 text-card-title">
+      <h1
+        class="text-3xl font-semibold mb-header-gap text-card-title md:text-5xl"
+      >
         {{ data.title }}
       </h1>
-      <p class="text-xl text-card-content mb-10 leading-relaxed">
+      <p
+        class="text-base text-card-content mb-content-gap leading-relaxed md:text-xl"
+      >
         {{ data.subtitle }}
       </p>
-      <div class="flex items-center justify-center gap-x-2">
+      <div class="flex flex-wrap gap-y-3 items-center justify-center gap-x-2">
         <Tag
           v-for="tag in data.tags"
           :key="tag.value"
@@ -56,17 +65,17 @@ function copyLink() {
           :value="tag.value"
           severity="secondary"
           rounded
-          class="!font-normal"
+          class="!text-xs !font-normal !md:text-sm"
         />
       </div>
     </header>
 
     <!-- Hero Image -->
-    <div class="mb-24 w-full">
+    <div class="w-full h-72 mb-section-mobile-gap md:mb-section-gap md:h-auto">
       <NuxtImg
         src="/img/blog-image.png"
         alt="Hot air balloons"
-        class="w-full rounded object-cover"
+        class="w-full h-full rounded object-cover"
       />
     </div>
 
@@ -77,9 +86,13 @@ function copyLink() {
       </ClientOnly>
     </section>
 
+    <Divider layout="horizontal" class="max-w-[720px] !m-8" />
+
     <!-- Author Section -->
-    <footer class="border-t pt-8 w-[720px]">
-      <div class="flex items-center justify-between mx-auto px-6 space-x-6">
+    <footer class="md:w-[720px]">
+      <div
+        class="flex flex-col gap-y-6 items-center justify-between md:flex-row"
+      >
         <!-- Author's Info -->
         <div class="flex items-center space-x-4">
           <img

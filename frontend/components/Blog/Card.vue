@@ -39,7 +39,7 @@ defineProps<Props>();
       </header>
       <!-- Wrap the main paragraph in a div with `flex-1` 
            so it takes up leftover space and pushes the footer down. -->
-      <div class="flex-1 mb-8">
+      <div class="flex-1 mb-4 md:mb-8">
         <p class="text-card-content">
           {{ data.subtitle }}
         </p>

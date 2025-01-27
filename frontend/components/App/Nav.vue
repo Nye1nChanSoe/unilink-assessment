@@ -5,13 +5,13 @@ const lang = ref("ENG");
 const route = useRoute();
 
 const menuItems = [
-  { label: "Explore", link: "/explore" },
-  { label: "All universities", link: "/universities" },
-  { label: "Scholarship Program", link: "/scholarship-program" },
-  { label: "Services", link: "/services" },
-  { label: "Webinars", link: "/webinars" },
+  // { label: "Explore", link: "/explore" },
+  // { label: "All universities", link: "/universities" },
+  // { label: "Scholarship Program", link: "/scholarship-program" },
+  // { label: "Services", link: "/services" },
+  // { label: "Webinars", link: "/webinars" },
   { label: "Blogs", link: "/blogs" },
-  { label: "Contact us", link: "/contact" },
+  // { label: "Contact us", link: "/contact" },
 ];
 </script>
 
@@ -102,14 +102,14 @@ const menuItems = [
       </NuxtLink>
 
       <!-- Invite Friend Button -->
-      <NuxtLink
+      <!-- <NuxtLink
         to="/invite"
         class="flex items-center gap-x-3 px-5 py-1 rounded-full bg-gift transition-color duration-200 text-black hover:text-nav-active hover:bg-gray-50"
         aria-label="Invite a Friend"
       >
         <NuxtImg src="/img/gift.png" alt="Gift Icon" class="w-6 h-6" />
         <span>Invite friend</span>
-      </NuxtLink>
+      </NuxtLink> -->
     </nav>
   </header>
 </template>

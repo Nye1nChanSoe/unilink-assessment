@@ -6,6 +6,6 @@
     <main class="px-page-gap">
       <slot />
     </main>
-    <AppFooter />
+    <!-- <AppFooter /> -->
   </section>
 </template>

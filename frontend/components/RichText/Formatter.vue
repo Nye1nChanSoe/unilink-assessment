@@ -38,6 +38,7 @@ function addTailwindClasses(html: string): string {
     "border-l-2 border-card-link pl-4 italic text-card-title text-2xl font-[500px] my-12"
   );
   $("blockquote footer").addClass("text-sm text-card-content mt-8 not-italic");
+  $("footer").addClass("text-sm text-card-content mt-8 not-italic");
 
   // Preformatted Text
   $("pre").addClass(
